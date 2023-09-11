@@ -2,6 +2,8 @@ import os
 import discord
 from dotenv import load_dotenv
 from client import CrossworkerClient
+import ws_listener
+
 load_dotenv()
 
 BOT_TOKEN = os.getenv('DISCORD_TOKEN')

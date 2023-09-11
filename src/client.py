@@ -1,5 +1,6 @@
 import discord
 import re
+import websocket
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -16,4 +17,7 @@ class CrossworkerClient(discord.Client):
       return
     
     await message.channel.send(f"Hi, {message.author}")
+
+  
+    
   
