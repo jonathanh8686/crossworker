@@ -13,10 +13,10 @@ def get_dfa_code(link: str) -> str:
   return re.sub(r'https://downforacross.com/beta/game/', '', link)
 
 class CrossworkerClient(discord.Client):
-  async def on_ready(self):
+  async def on_ready(self) -> None:
     logger.success("Logged on as {self.user}")
 
-  async def on_message(self, message: discord.Message):
+  async def on_message(self, message: discord.Message) -> None:
     # ignore messages sent by the bot
     if message.author == self.user:
       return
