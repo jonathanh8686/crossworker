@@ -40,4 +40,3 @@ class CrossworkerClient(discord.Client):
 
             self.active_workers.append(Worker(dfa_code))
             await self.active_workers[-1].attach()
-

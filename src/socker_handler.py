@@ -1,6 +1,6 @@
 import asyncio
-from typing import Any, Awaitable, Callable
 from loguru import logger
+from typing import Any, Awaitable, Callable
 from websockets.client import WebSocketClientProtocol, connect
 
 
@@ -19,7 +19,9 @@ class WebsocketClient:
             await client.send("2")
             await asyncio.sleep(self.HEARTBEAT_DELAY)
 
-    async def listen(self, client: WebSocketClientProtocol, callback: Callable[[str], Any]) -> None:
+    async def listen(
+        self, client: WebSocketClientProtocol, callback: Callable[[str], Any]
+    ) -> None:
         while self.game_running:
             recv_data = await asyncio.wait_for(
                 client.recv(), self.RECV_TIMEOUT
@@ -33,8 +35,10 @@ class WebsocketClient:
                 )
                 self.messages.append(recv_data)
                 asyncio.create_task(callback(recv_data))
-            
-    async def join_game(self, game_id: str, callback: Callable[[str], Any]) -> None:
+
+    async def join_game(
+        self, game_id: str, callback: Callable[[str], Any]
+    ) -> None:
         ws_url = "wss://api.foracross.com/socket.io/?EIO=3&transport=websocket"
         async with connect(ws_url) as client:
             logger.success("Successfully connected to WebSocket server")
