@@ -4,6 +4,5 @@
     "databaseURL": "https://crosswordsio.firebaseio.com",
     "projectId": "crosswordsio",
     "storageBucket": "crosswordsio.appspot.com",
-    "messagingSenderId": "1021412055058",
     "type": "service_account"
 }
