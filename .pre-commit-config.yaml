@@ -3,14 +3,14 @@ repos:
     rev: 20.8b1
     hooks:
       - id: black
-      - stages: [push]
+        stages: [push]
   - repo: https://github.com/PyCQA/isort
     rev: 5.7.0
     hooks:
       - id: isort
-      - stages: [push]
+        stages: [push]
   - repo: https://github.com/PyCQA/flake8
     rev: 3.8.4
     hooks:
       - id: flake8
-      - stages: [push]
+        stages: [push]
