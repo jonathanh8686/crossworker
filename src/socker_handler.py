@@ -1,4 +1,5 @@
 import asyncio
+from typing import Any, Awaitable, Callable
 from loguru import logger
 from websockets.client import WebSocketClientProtocol, connect
 
@@ -10,15 +11,16 @@ class WebsocketClient:
 
     def __init__(self) -> None:
         self.messages: list[str] = []
+        self.game_running = False
 
     async def heartbeat(self, client: WebSocketClientProtocol) -> None:
-        while True:
+        while self.game_running:
             logger.info("Emitting heartbeat...")
             await client.send("2")
             await asyncio.sleep(self.HEARTBEAT_DELAY)
 
-    async def listen(self, client: WebSocketClientProtocol) -> None:
-        while True:
+    async def listen(self, client: WebSocketClientProtocol, callback: Callable[[str], Any]) -> None:
+        while self.game_running:
             recv_data = await asyncio.wait_for(
                 client.recv(), self.RECV_TIMEOUT
             )
@@ -30,19 +32,18 @@ class WebsocketClient:
                     f"Recieved message from socket server: {recv_data}"
                 )
                 self.messages.append(recv_data)
-
-            with open("test.dat", "w") as f:
-                f.write("\n".join(self.messages))
-
-    async def join_game(self, game_id: str) -> None:
+                asyncio.create_task(callback(recv_data))
+            
+    async def join_game(self, game_id: str, callback: Callable[[str], Any]) -> None:
         ws_url = "wss://api.foracross.com/socket.io/?EIO=3&transport=websocket"
         async with connect(ws_url) as client:
             logger.success("Successfully connected to WebSocket server")
+            self.game_running = True
             heartbeat_task = asyncio.create_task(self.heartbeat(client))
             await client.send(f'420["join_game", "{game_id}"]')
             await client.send(f'421["sync_all_game_events", "{game_id}"]')
 
-            listen_task = asyncio.create_task(self.listen(client))
+            listen_task = asyncio.create_task(self.listen(client, callback))
 
             await heartbeat_task
             await listen_task

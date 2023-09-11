@@ -3,6 +3,5 @@
     "authDomain": "crosswordsio.firebaseapp.com",
     "databaseURL": "https://crosswordsio.firebaseio.com",
     "projectId": "crosswordsio",
-    "storageBucket": "crosswordsio.appspot.com",
-    "type": "service_account"
+    "storageBucket": "crosswordsio.appspot.com"
 }
