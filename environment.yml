@@ -12,4 +12,3 @@ dependencies:
   - mypy
   - python-socketio
   - python-dotenv
-prefix: /home/jonathanh1386/anaconda3/envs/crossworker
