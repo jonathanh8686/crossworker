@@ -1,7 +1,8 @@
 import json
+
+import pyrebase  # type: ignore
 from typing import TypedDict
 
-import pyrebase # type: ignore
 
 class ClueDict(TypedDict):
   across: list[str]

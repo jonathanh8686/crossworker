@@ -1,5 +1,4 @@
 import asyncio
-
 from loguru import logger
 from websockets.client import WebSocketClientProtocol, connect
 
