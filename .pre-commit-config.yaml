@@ -5,7 +5,7 @@ repos:
       - id: black
         stages: [push]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.7.0
+    rev: 5.12.0
     hooks:
       - id: isort
         stages: [push]
