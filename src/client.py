@@ -1,8 +1,6 @@
 import discord
 import re
 from socker_handler import WebsocketClient
-import asyncio
-
 from loguru import logger
 
 intents = discord.Intents.default()
