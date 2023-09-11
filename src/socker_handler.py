@@ -3,7 +3,8 @@ from websockets.client import connect
 from websockets.client import WebSocketClientProtocol
 from loguru import logger
 
-class WebsocketClient():
+
+class WebsocketClient:
     HEARTBEAT_DELAY = 2
     RECV_TIMEOUT = 5
 
@@ -13,9 +14,9 @@ class WebsocketClient():
     async def heartbeat(self, client: WebSocketClientProtocol) -> None:
         while True:
             logger.info("Emitting heartbeat...")
-            await client.send('2')
+            await client.send("2")
             await asyncio.sleep(self.HEARTBEAT_DELAY)
-    
+
     async def listen(self, client: WebSocketClientProtocol) -> None:
         while True:
             recv_data = await asyncio.wait_for(client.recv(), self.RECV_TIMEOUT)
