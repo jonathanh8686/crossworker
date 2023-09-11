@@ -19,14 +19,18 @@ class WebsocketClient:
 
     async def listen(self, client: WebSocketClientProtocol) -> None:
         while True:
-            recv_data = await asyncio.wait_for(client.recv(), self.RECV_TIMEOUT)
+            recv_data = await asyncio.wait_for(
+                client.recv(), self.RECV_TIMEOUT
+            )
             recv_data = await client.recv()
             assert isinstance(recv_data, str)
 
             if recv_data != "":
-                logger.info(f"Recieved message from socket server: {recv_data}")
+                logger.info(
+                    f"Recieved message from socket server: {recv_data}"
+                )
                 self.messages.append(recv_data)
-        
+
             with open("test.dat", "w") as f:
                 f.write("\n".join(self.messages))
 

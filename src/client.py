@@ -10,7 +10,9 @@ intents.message_content = True
 
 
 def is_dfa_link(link: str) -> bool:
-    return re.match(r"https://downforacross.com/beta/game/.+", link) is not None
+    return (
+        re.match(r"https://downforacross.com/beta/game/.+", link) is not None
+    )
 
 
 def get_dfa_code(link: str) -> str:
