@@ -1,10 +1,11 @@
 import discord
+import re
 
 intents = discord.Intents.default()
 intents.message_content = True
 
 def is_dfa_link(link: str) -> bool:
-  pass
+  return re.match(r'https://downforacross.com/beta/game/.+', link)
 
 class CrossworkerClient(discord.Client):
   async def on_ready(self):
