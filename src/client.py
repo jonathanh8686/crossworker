@@ -1,7 +1,9 @@
-import discord
 import re
-from socker_handler import WebsocketClient
+
+import discord
 from loguru import logger
+
+from socker_handler import WebsocketClient
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -17,7 +19,7 @@ def get_dfa_code(link: str) -> str:
 
 class CrossworkerClient(discord.Client):
     async def on_ready(self) -> None:
-        logger.success("Logged on as {self.user}")
+        logger.success(f"Logged on as {self.user}")
 
     async def on_message(self, message: discord.Message) -> None:
         # ignore messages sent by the bot
