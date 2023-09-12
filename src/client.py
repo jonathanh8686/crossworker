@@ -1,7 +1,6 @@
 import discord
 import re
-import ws_listener as ws
-
+from socker_handler import WebsocketClient
 from loguru import logger
 
 intents = discord.Intents.default()
@@ -14,24 +13,16 @@ def get_dfa_code(link: str) -> str:
   return re.sub(r'https://downforacross.com/beta/game/', '', link)
 
 class CrossworkerClient(discord.Client):
-  async def on_ready(self):
-    print(f'Logged on as {self.user}!')
+  async def on_ready(self) -> None:
+    logger.success("Logged on as {self.user}")
 
-  async def on_message(self, message: discord.Message):
+  async def on_message(self, message: discord.Message) -> None:
+    # ignore messages sent by the bot
     if message.author == self.user:
-      # ignore messages sent by the bot
       return
     
     if is_dfa_link(message.content):
       dfa_code = get_dfa_code(message.content)
-      print(f'Joining game {dfa_code}')
+      logger.info(f"Detected DFA link, Parsed code as: {dfa_code}")
       await message.channel.send(f'Joining crossword {dfa_code}!')
-      client = ws.WebsocketClient()
-      client.join_game(dfa_code)
-      client.listen_game(dfa_code)
-
-    # await message.channel.send(f"Hi, {message.author}")
-
-  
-    
-  
+      await WebsocketClient().join_game(dfa_code)
