@@ -2,6 +2,7 @@ name: crossworker
 channels:
   - conda-forge
 dependencies:
+  - pip
   - python=3.10.6
   - discord.py
   - loguru
@@ -9,6 +10,7 @@ dependencies:
   - openssl
   - websockets
   - python-dotenv
+  - mypy
   - pip:
       - cachecontrol==0.13.1
       - cryptography==41.0.3
