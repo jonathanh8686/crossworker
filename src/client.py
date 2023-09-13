@@ -37,6 +37,5 @@ class CrossworkerClient(discord.Client):
             dfa_code = get_dfa_code(message.content)
             logger.info(f"Detected DFA link, Parsed code as: {dfa_code}")
             await message.channel.send(f"Joining crossword {dfa_code}!")
-
             self.active_workers.append(Worker(dfa_code))
             await self.active_workers[-1].attach()
