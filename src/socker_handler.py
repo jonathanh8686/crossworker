@@ -26,7 +26,6 @@ class WebsocketClient:
             recv_data = await asyncio.wait_for(
                 client.recv(), self.RECV_TIMEOUT
             )
-            recv_data = await client.recv()
             assert isinstance(recv_data, str)
 
             if recv_data != "":
@@ -44,10 +43,10 @@ class WebsocketClient:
             logger.success("Successfully connected to WebSocket server")
             self.game_running = True
             heartbeat_task = asyncio.create_task(self.heartbeat(client))
+            listen_task = asyncio.create_task(self.listen(client, callback))
+
             await client.send(f'420["join_game", "{game_id}"]')
             await client.send(f'421["sync_all_game_events", "{game_id}"]')
-
-            listen_task = asyncio.create_task(self.listen(client, callback))
 
             await heartbeat_task
             await listen_task
