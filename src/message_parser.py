@@ -15,4 +15,5 @@ async def game_event_to_json(msg: str) -> dict:
     formatted_json['timestamp'] = dic['timestamp']
 
     return formatted_json
+    #always contains: type, timestamp, cell, id,
 
