@@ -19,16 +19,16 @@ class Worker:
     async def on_game_message(self, msg: str) -> None:
 
         if mp.is_game_event(msg):
-            event_json = await mp.game_event_to_json(msg)
+            event_json = await mp.game_event_to_message_obj(msg)
             #json always contains: type, timestamp, cell, id,
 
-            match event_json['type']:
-                case "updateDisplayName":
-                    self.id_to_username[event_json['id']] = event_json['displayName']
-                    logger.info(f"user id {event_json['id']} changed username to {event_json['displayName']}")
+            # match event_json['type']:
+            #     case "updateDisplayName":
+            #         self.id_to_username[event_json['id']] = event_json['displayName']
+            #         logger.info(f"user id {event_json['id']} changed username to {event_json['displayName']}")
                     
-                case "updateCell":
-                    logger.info(f"Cell ({event_json['cell']['r']}, {event_json['cell']['c']}) updated to {event_json['value']}")
+            #     case "updateCell":
+            #         logger.info(f"Cell ({event_json['cell']['r']}, {event_json['cell']['c']}) updated to {event_json['value']}")
 
 
             with open("test.dat", "a") as f:

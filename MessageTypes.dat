@@ -3,7 +3,6 @@ File for just keeping track of every type of message type and format
 Gameplay
 42["game_event",{"timestamp":1694592455209,"type":"updateCursor","params":{"timestamp":1694592455209,"cell":{"r":6,"c":7},"id":"12397aeb"},"id":"df60889b-22bb-432d-8e83-a872eca64597"}]
 42["game_event",{"timestamp":1694592457812,"type":"updateCell","params":{"cell":{"r":6,"c":12},"value":"8","color":"hsl(291,63%,42%)","pencil":false,"id":"12397aeb"},"id":"cf42f4c5-e90b-4ea1-86f1-3f239f910d5c"}]
-42["game_event",{"timestamp":1694631655087,"type":"updateDisplayName","params":{"id":"12397aeb","displayName":"james"},"id":"b29e0523-93bc-4ed4-90c4-f80f69392836"}]
 42["game_event",{"timestamp":1694585351243,"type":"check","params":{"scope":[{"r":0,"c":0},{"r":0,"c":1},{"r":0,"c":2},{"r":0,"c":3},{"r":0,"c":4},{"r":0,"c":5},{"r":0,"c":6},{"r":0,"c":7},{"r":0,"c":8},{"r":1,"c":0},{"r":1,"c":1},{"r":1,"c":2},{"r":1,"c":3},{"r":1,"c":4},{"r":1,"c":5},{"r":1,"c":6},{"r":1,"c":7},{"r":1,"c":8},{"r":2,"c":0},{"r":2,"c":1},{"r":2,"c":2},{"r":2,"c":3},{"r":2,"c":4},{"r":2,"c":5},{"r":2,"c":6},{"r":2,"c":7},{"r":2,"c":8},{"r":3,"c":0},{"r":3,"c":1},{"r":3,"c":2},{"r":3,"c":3},{"r":3,"c":4},{"r":3,"c":5},{"r":3,"c":6},{"r":3,"c":7},{"r":3,"c":8},{"r":4,"c":0},{"r":4,"c":1},{"r":4,"c":2},{"r":4,"c":3},{"r":4,"c":4},{"r":4,"c":5},{"r":4,"c":6},{"r":4,"c":7},{"r":4,"c":8},{"r":5,"c":0},{"r":5,"c":1},{"r":5,"c":2},{"r":5,"c":3},{"r":5,"c":4},{"r":5,"c":5},{"r":5,"c":6},{"r":5,"c":7},{"r":5,"c":8},{"r":6,"c":0},{"r":6,"c":1},{"r":6,"c":2},{"r":6,"c":3},{"r":6,"c":4},{"r":6,"c":5},{"r":6,"c":6},{"r":6,"c":7},{"r":6,"c":8},{"r":7,"c":0},{"r":7,"c":1},{"r":7,"c":2},{"r":7,"c":3},{"r":7,"c":4},{"r":7,"c":5},{"r":7,"c":6},{"r":7,"c":7},{"r":7,"c":8},{"r":8,"c":0},{"r":8,"c":1},{"r":8,"c":2},{"r":8,"c":3},{"r":8,"c":4},{"r":8,"c":5},{"r":8,"c":6},{"r":8,"c":7},{"r":8,"c":8}]},"id":"afdd31ba-8c59-41d3-855c-8f99226b58cc"}]
 
 Reveals
@@ -25,3 +24,8 @@ Checks
 
 Display Name
 42["game_event",{"timestamp":1694631483692,"type":"updateDisplayName","params":{"id":"12397aeb","displayName":"jonathan"},"id":"c28b93f4-46dd-427a-b7a6-bd9c8d0e528f"}]
+
+
+Timestamp, ID, Type,
+
+reset: Force
