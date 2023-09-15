@@ -1,4 +1,4 @@
-import json
+import json 
 
 def is_game_event(msg: str) -> bool:
     return len(msg) >= 2 and msg[:2] == "42"

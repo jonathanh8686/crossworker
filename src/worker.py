@@ -1,5 +1,5 @@
 import asyncio
-import message_parser as mp
+import messaging.message_parser as mp
 from loguru import logger
 
 
