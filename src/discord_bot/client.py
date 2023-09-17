@@ -2,7 +2,6 @@ import re
 
 import discord
 from loguru import logger
-
 from worker import Worker
 
 intents = discord.Intents.default()
@@ -27,7 +26,7 @@ class CrossworkerClient(discord.Client):
     async def on_ready(self) -> None:
         logger.success(f"Logged on as {self.user}")
 
-        dfa_code ="3879842-hect"
+        dfa_code = "3879842-hect"
         logger.info(f"Detected DFA link, Parsed code as: {dfa_code}")
         self.active_workers.append(Worker(dfa_code))
         await self.active_workers[-1].attach()
