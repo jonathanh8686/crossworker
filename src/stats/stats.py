@@ -1,9 +1,9 @@
 import matplotlib
 import matplotlib.pyplot as plt
+from celluloid import Camera
 
 from src.stats.correct_map import get_correct_map
 
-from celluloid import Camera
 from ..discord_bot.message_types import GameEvent, GameModel
 
 
@@ -20,6 +20,6 @@ class Statistics:
                 get_correct_map(ax2, self.game, self.history, update.timestamp)
             )
             camera.snap()
-        
+
         animation = camera.animate()
-        animation.save('test.mp4')
+        animation.save("test.mp4")
