@@ -1,12 +1,17 @@
-from matplotlib.axes import Axes
 import matplotlib.pyplot as plt
 import pandas as pd
 from loguru import logger
+from matplotlib.axes import Axes
 
 from ..discord_bot.message_types import GameEvent, GameModel, UpdateCellModel
 
 
-def get_completion_line(axis: Axes, game: GameModel, history: dict[str, list[GameEvent]], timestamp: int):
+def get_completion_line(
+    axis: Axes,
+    game: GameModel,
+    history: dict[str, list[GameEvent]],
+    timestamp: int,
+):
     plot_data: list[tuple[int, float]] = []
     current_grid = [
         ["." for _ in range(len(game.solution[0]))]
@@ -20,7 +25,6 @@ def get_completion_line(axis: Axes, game: GameModel, history: dict[str, list[Gam
                 total_blanks += 1
 
     for cellChangeEvent in history["updateCell"]:
-
         if cellChangeEvent.timestamp > timestamp:
             break
 
@@ -38,10 +42,10 @@ def get_completion_line(axis: Axes, game: GameModel, history: dict[str, list[Gam
                     == current_grid[row_ind][col_ind]
                     else 0
                 )
-        
-        plot_data.append((cellChangeEvent.timestamp, solved_blanks/total_blanks))
-    
+
+        plot_data.append(
+            (cellChangeEvent.timestamp, solved_blanks / total_blanks)
+        )
+
     times, percents = zip(*plot_data)
     axis.plot(times, percents, marker="", linestyle="-")
-    
-

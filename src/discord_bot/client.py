@@ -2,6 +2,7 @@ import re
 
 import discord
 from loguru import logger
+
 from .worker import Worker
 
 intents = discord.Intents.default()
@@ -25,8 +26,6 @@ class CrossworkerClient(discord.Client):
 
     async def on_ready(self) -> None:
         logger.success(f"Logged on as {self.user}")
-    
-
 
     async def on_message(self, message: discord.Message) -> None:
         # ignore messages sent by the bot
