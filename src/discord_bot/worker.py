@@ -6,7 +6,7 @@ from typing import Optional
 
 from ..stats import stats
 from . import message_parser as mp
-from .message_types import GameEvent, UpdateCellModel
+from .message_types import GameEvent, GameModel, UpdateCellModel
 from .socker_handler import WebsocketClient
 
 
@@ -22,13 +22,12 @@ class Worker:
         self.game_id = game_id
         self.state = WorkerState.Startup
 
-        self.solution: Optional[list[list[str]]] = None
+        self.game: Optional[GameModel] = None
         self.grid: list[list[str]] = []
 
         self.history: dict[str, list[GameEvent]] = {}
 
         self.event_map: dict[str, GameEvent] = {}
-        logger.info(f"Testing stats import: {stats.print_data('Hello World')}")
 
     async def attach(self):
         await WebsocketClient().join_game(self.game_id, self.on_game_message)
@@ -41,10 +40,10 @@ class Worker:
         if self.state == WorkerState.Startup and mp.is_sync_message(msg):
             create_event = await mp.parse_sync_event(msg)
 
-            self.solution = create_event[0].params.game.solution
+            self.game = create_event[0].params.game
             self.grid = [
-                ["." for _ in range(len(self.solution[0]))]
-                for _ in range(len(self.solution))
+                ["." for _ in range(len(self.game.solution[0]))]
+                for _ in range(len(self.game.solution))
             ]
             self.state = WorkerState.InGame
 
@@ -68,10 +67,10 @@ class Worker:
                 self.__process_update_cell(event_json[1])
 
             solved = True
-            assert self.solution is not None
-            for r_ind in range(len(self.solution)):
-                for c_ind in range(len(self.solution[r_ind])):
-                    if self.solution[r_ind][c_ind] != self.grid[r_ind][c_ind]:
+            assert self.game is not None and self.game.solution is not None
+            for r_ind in range(len(self.game.solution)):
+                for c_ind in range(len(self.game.solution[r_ind])):
+                    if self.game.solution[r_ind][c_ind] != self.grid[r_ind][c_ind]:
                         solved = False
                         break
                 if not solved:
@@ -81,4 +80,5 @@ class Worker:
                 self.state = WorkerState.Finishing
 
         if self.state == WorkerState.Finishing:
-            stats.print_data(self.history)
+            assert self.game is not None
+            stats.get_completion_line(self.game, self.history)
