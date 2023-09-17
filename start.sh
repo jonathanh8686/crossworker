@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python src/start.py
+python src/discord_bot/start.py

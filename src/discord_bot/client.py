@@ -2,8 +2,6 @@ import re
 
 import discord
 from loguru import logger
-
-from socker_handler import WebsocketClient
 from worker import Worker
 
 intents = discord.Intents.default()

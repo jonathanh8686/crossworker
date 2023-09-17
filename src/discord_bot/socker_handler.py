@@ -1,6 +1,6 @@
 import asyncio
 from loguru import logger
-from typing import Any, Awaitable, Callable
+from typing import Any, Callable
 from websockets.client import WebSocketClientProtocol, connect
 
 
