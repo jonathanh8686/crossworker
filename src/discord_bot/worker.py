@@ -70,7 +70,10 @@ class Worker:
             assert self.game is not None and self.game.solution is not None
             for r_ind in range(len(self.game.solution)):
                 for c_ind in range(len(self.game.solution[r_ind])):
-                    if self.game.solution[r_ind][c_ind] != self.grid[r_ind][c_ind]:
+                    if (
+                        self.game.solution[r_ind][c_ind]
+                        != self.grid[r_ind][c_ind]
+                    ):
                         solved = False
                         break
                 if not solved:

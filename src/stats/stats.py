@@ -1,5 +1,5 @@
-from ..stats.completion_line import get_completion_line
 from ..discord_bot.message_types import GameEvent, GameModel
+from ..stats.completion_line import get_completion_line
 
 
 class Statistics:
