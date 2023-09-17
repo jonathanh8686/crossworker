@@ -1,8 +1,9 @@
 import os
 
 import discord
-from .client import CrossworkerClient
 from dotenv import load_dotenv
+
+from .client import CrossworkerClient
 
 load_dotenv()
 

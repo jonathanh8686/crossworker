@@ -1,6 +1,5 @@
 name: crossworker
 channels:
-  - defaults
   - conda-forge
 dependencies:
   - websockets
@@ -13,12 +12,11 @@ dependencies:
   - openssl
   - mypy
   - pydantic
-  - matplotlib
   - pandas
-  - typing
-  - pre-commit
-  - conda
-  - conda-libmamba-solver
+  - plotly
+  - python-kaleido
+  - matplotlib
+  - celluloid
   - certifi
-  - mamba
-  - numpy
+  - ffmpeg
+

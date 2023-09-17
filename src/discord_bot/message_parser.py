@@ -1,7 +1,9 @@
 import json
 
 from loguru import logger
+
 from .message_types import (
+    AddPingModel,
     ChatModel,
     CheckModel,
     CreateEvent,
@@ -66,6 +68,8 @@ async def parse_game_event(msg: str) -> tuple[str, GameEvent]:
             parsed_obj = UpdateClockModel.model_validate(event_obj)
         case "reset":
             parsed_obj = ResetModel.model_validate(event_obj)
+        case "addPing":
+            parsed_obj = AddPingModel.model_validate(event_obj)
         case _:
             logger.error(f"Unidentified message recieved: {msg}")
             raise ValueError("Unknown message type recieved")
