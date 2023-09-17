@@ -1,5 +1,13 @@
-from ..discord_bot.message_types import GameEvent
+import matplotlib
+import matplotlib.pyplot as plt
+
+from ..discord_bot.message_types import GameEvent, GameModel
 
 
-def process_history(history: dict[str, list[GameEvent]]) -> None:
-    pass
+class Statistics:
+    def __init__(self, game: GameModel, history: dict[str, list[GameEvent]]):
+        self.game = game
+        self.history = history
+
+    def get_visualization(self):
+        fig, ax = plt.subplots(1, 1)
