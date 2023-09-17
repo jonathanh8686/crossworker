@@ -1,11 +1,11 @@
 import json
-from typing import Optional
 
 import message_parser as mp
 from enum import Enum
 from loguru import logger
 from message_types import GameEvent, UpdateCellModel
 from socker_handler import WebsocketClient
+from typing import Optional
 
 
 class WorkerState(Enum):
@@ -29,7 +29,7 @@ class Worker:
 
     async def attach(self):
         await WebsocketClient().join_game(self.game_id, self.on_game_message)
-    
+
     def __process_update_cell(self, event: UpdateCellModel):
         cell = event.params.cell
         self.grid[cell.r][cell.c] = event.params.value
@@ -39,7 +39,10 @@ class Worker:
             create_event = await mp.parse_sync_event(msg)
 
             self.solution = create_event[0].params.game.solution
-            self.grid = [["." for _ in range(len(self.solution[0]))] for _ in range(len(self.solution))]
+            self.grid = [
+                ["." for _ in range(len(self.solution[0]))]
+                for _ in range(len(self.solution))
+            ]
             self.state = WorkerState.InGame
 
             for prior in create_event[1]:
@@ -70,12 +73,9 @@ class Worker:
                         break
                 if not solved:
                     break
-        
+
             if solved:
                 self.state = WorkerState.Finishing
-            
+
         if self.state == WorkerState.Finishing:
             logger.info(f"Detected completed game: {self.history}")
-
-
-
