@@ -1,6 +1,5 @@
-import matplotlib.pyplot as plt
 import matplotlib
-
+import matplotlib.pyplot as plt
 
 from ..discord_bot.message_types import GameEvent, GameModel
 

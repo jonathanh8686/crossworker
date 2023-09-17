@@ -33,20 +33,19 @@ class Worker:
         self.websocket_client = WebsocketClient()
 
     async def attach(self):
-        await self.websocket_client.join_game(self.game_id, self.on_game_message)
+        await self.websocket_client.join_game(
+            self.game_id, self.on_game_message
+        )
 
     def __process_update_cell(self, event: UpdateCellModel):
         cell = event.params.cell
         self.grid[cell.r][cell.c] = event.params.value
-    
+
     def __game_completed(self) -> bool:
         assert self.game is not None and self.game.solution is not None
         for r_ind in range(len(self.game.solution)):
             for c_ind in range(len(self.game.solution[r_ind])):
-                if (
-                    self.game.solution[r_ind][c_ind]
-                    != self.grid[r_ind][c_ind]
-                ):
+                if self.game.solution[r_ind][c_ind] != self.grid[r_ind][c_ind]:
                     return False
         return True
 
@@ -68,7 +67,7 @@ class Worker:
                 if prior[0] == "updateCell":
                     assert isinstance(prior[1], UpdateCellModel)
                     self.__process_update_cell(prior[1])
-            
+
             if self.__game_completed():
                 self.state = WorkerState.Finishing
 
