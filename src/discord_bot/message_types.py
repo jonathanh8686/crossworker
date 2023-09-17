@@ -183,5 +183,7 @@ class AddPingParamsModel(BaseModel):
     timestamp: int
     cell: CellModel
     id: str
+
+
 class AddPingModel(GameEvent):
     params: AddPingParamsModel

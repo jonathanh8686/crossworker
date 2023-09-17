@@ -1,9 +1,9 @@
-from typing import Optional
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
 import pandas as pd
 from loguru import logger
 from matplotlib.axes import Axes
+from matplotlib.ticker import FuncFormatter
+from typing import Optional
 
 from ..discord_bot.message_types import GameEvent, GameModel, UpdateCellModel
 
