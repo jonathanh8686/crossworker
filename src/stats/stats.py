@@ -8,4 +8,4 @@ class Statistics:
         self.history = history
 
     def get_visualization(self):
-        completion_line = get_completion_line(self.game, self.history)
+        get_completion_line(self.game, self.history)

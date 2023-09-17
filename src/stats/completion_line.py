@@ -51,5 +51,3 @@ def get_completion_line(game: GameModel, history: dict[str, list[GameEvent]]):
 
     plt.plot(df["timestamp"].tolist(), df["completion"].tolist())
     plt.show()
-    # fig = go.Figure(data=go.Scatter(x=df['timestamp'], y=df['completion'], mode='markers'))
-    # fig.show()
