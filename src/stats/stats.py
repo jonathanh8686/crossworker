@@ -1,7 +1,10 @@
+import matplotlib
 import matplotlib.pyplot as plt
+from celluloid import Camera
+
+from src.stats.correct_map import get_correct_map
 
 from ..discord_bot.message_types import GameEvent, GameModel
-from ..stats.completion_line import get_completion_line
 
 
 class Statistics:
@@ -11,14 +14,12 @@ class Statistics:
 
     def get_visualization(self):
         fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+        camera = Camera(fig)
+        for update in self.history["updateCell"]:
+            next(
+                get_correct_map(ax2, self.game, self.history, update.timestamp)
+            )
+            camera.snap()
 
-        get_completion_line(
-            ax1,
-            self.game,
-            self.history,
-            self.history["updateCell"][-1].timestamp,
-        )
-
-        fig.show()
-
-        input()
+        animation = camera.animate()
+        animation.save("test.mp4")
