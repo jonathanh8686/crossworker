@@ -1,8 +1,11 @@
+import matplotlib
+import matplotlib.pyplot as plt
+
 import matplotlib.pyplot as plt
 
 from src.stats.correct_map import get_correct_map
 
-from ..discord_bot.message_types import GameEvent, GameModel
+from ..discord_bot.message_types import GameEvent, GameModel, GameModel
 
 
 class Statistics:

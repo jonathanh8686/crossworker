@@ -1,6 +1,6 @@
 import asyncio
 from loguru import logger
-from typing import Any, Callable
+from typing import Any, Callable, Optional
 from websockets.client import WebSocketClientProtocol, connect
 
 
@@ -12,6 +12,9 @@ class WebsocketClient:
     def __init__(self) -> None:
         self.messages: list[str] = []
         self.game_running = False
+
+        self.heartbeat_task: Optional[asyncio.Task[None]] = None
+        self.listen_task: Optional[asyncio.Task[None]] = None
 
     async def heartbeat(self, client: WebSocketClientProtocol) -> None:
         while self.game_running:
@@ -26,6 +29,7 @@ class WebsocketClient:
             recv_data = await asyncio.wait_for(
                 client.recv(), self.RECV_TIMEOUT
             )
+
             assert isinstance(recv_data, str)
 
             if recv_data != "":
@@ -42,11 +46,13 @@ class WebsocketClient:
         async with connect(ws_url) as client:
             logger.success("Successfully connected to WebSocket server")
             self.game_running = True
-            heartbeat_task = asyncio.create_task(self.heartbeat(client))
-            listen_task = asyncio.create_task(self.listen(client, callback))
+            self.heartbeat_task = asyncio.create_task(self.heartbeat(client))
+            self.listen_task = asyncio.create_task(
+                self.listen(client, callback)
+            )
 
             await client.send(f'420["join_game", "{game_id}"]')
             await client.send(f'421["sync_all_game_events", "{game_id}"]')
 
-            await heartbeat_task
-            await listen_task
+            await self.heartbeat_task
+            await self.listen_task
