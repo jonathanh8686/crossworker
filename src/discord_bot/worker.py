@@ -1,12 +1,13 @@
 import json
 
-from . import message_parser as mp
 from enum import Enum
 from loguru import logger
+from typing import Optional
+
+from ..stats import stats
+from . import message_parser as mp
 from .message_types import GameEvent, UpdateCellModel
 from .socker_handler import WebsocketClient
-from typing import Optional
-from ..stats import stats
 
 
 class WorkerState(Enum):
