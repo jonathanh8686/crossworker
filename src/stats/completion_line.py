@@ -1,3 +1,4 @@
+from matplotlib.axes import Axes
 import matplotlib.pyplot as plt
 import pandas as pd
 from loguru import logger
@@ -5,8 +6,8 @@ from loguru import logger
 from ..discord_bot.message_types import GameEvent, GameModel, UpdateCellModel
 
 
-def get_completion_line(game: GameModel, history: dict[str, list[GameEvent]]):
-    df = pd.DataFrame(columns=["timestamp", "completion"])
+def get_completion_line(axis: Axes, game: GameModel, history: dict[str, list[GameEvent]], timestamp: int):
+    plot_data: list[tuple[int, float]] = []
     current_grid = [
         ["." for _ in range(len(game.solution[0]))]
         for _ in range(len(game.solution))
@@ -19,6 +20,10 @@ def get_completion_line(game: GameModel, history: dict[str, list[GameEvent]]):
                 total_blanks += 1
 
     for cellChangeEvent in history["updateCell"]:
+
+        if cellChangeEvent.timestamp > timestamp:
+            break
+
         assert isinstance(cellChangeEvent, UpdateCellModel)
         r, c = cellChangeEvent.params.cell.r, cellChangeEvent.params.cell.c
 
@@ -33,21 +38,10 @@ def get_completion_line(game: GameModel, history: dict[str, list[GameEvent]]):
                     == current_grid[row_ind][col_ind]
                     else 0
                 )
+        
+        plot_data.append((cellChangeEvent.timestamp, solved_blanks/total_blanks))
+    
+    times, percents = zip(*plot_data)
+    axis.plot(times, percents, marker="", linestyle="-")
+    
 
-        df = pd.concat(
-            [
-                df,
-                pd.DataFrame(
-                    [
-                        {
-                            "timestamp": cellChangeEvent.timestamp,
-                            "completion": solved_blanks / total_blanks,
-                        }
-                    ]
-                ),
-            ],
-            ignore_index=True,
-        )
-
-    plt.plot(df["timestamp"].tolist(), df["completion"].tolist())
-    plt.show()

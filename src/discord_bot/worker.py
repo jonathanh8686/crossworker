@@ -2,7 +2,7 @@ import json
 
 from enum import Enum
 from loguru import logger
-from typing import Optional
+from typing import Callable, Optional
 
 from ..stats import stats
 from . import message_parser as mp
@@ -84,4 +84,5 @@ class Worker:
 
         if self.state == WorkerState.Finishing:
             assert self.game is not None
-            stats.get_completion_line(self.game, self.history)
+            stats_object = stats.Statistics(self.game, self.history)
+            stats_object.get_visualization()
