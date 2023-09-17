@@ -80,4 +80,4 @@ class Worker:
                 self.state = WorkerState.Finishing
 
         if self.state == WorkerState.Finishing:
-            logger.info(f"Detected completed game: {self.history}")
+            stats.print_data(self.history)
