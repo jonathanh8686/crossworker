@@ -2,18 +2,18 @@ import json
 
 from loguru import logger
 from message_types import (
+    ChatModel,
+    CheckModel,
     CreateEvent,
     GameEvent,
-    UpdateCellModel,
-    UpdateCursorModel,
-    UpdateDispayNameModel,
-    CheckModel,
-    RevealModel,
     ResetModel,
+    RevealModel,
     SendChatMessageModel,
-    ChatModel,
+    UpdateCellModel,
     UpdateClockModel,
     UpdateColorModel,
+    UpdateCursorModel,
+    UpdateDispayNameModel,
 )
 
 
