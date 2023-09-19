@@ -28,7 +28,7 @@ class Worker:
         self.history: dict[str, list[GameEvent]] = {}
 
         self.event_map: dict[str, GameEvent] = {}
-        logger.info(f"Testing stats import: {stats.print_data('Hello World')}")
+        logger.info(f"Testing stats import: {stats.process_history(self.history)}")
 
     async def attach(self):
         await WebsocketClient().join_game(self.game_id, self.on_game_message)
@@ -81,4 +81,4 @@ class Worker:
                 self.state = WorkerState.Finishing
 
         if self.state == WorkerState.Finishing:
-            stats.print_data(self.history)
+            stats.process_history(self.history)
