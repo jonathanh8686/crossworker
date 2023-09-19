@@ -21,3 +21,4 @@ dependencies:
   - conda-libmamba-solver
   - certifi
   - mamba
+  - numpy
