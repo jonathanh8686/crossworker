@@ -1,7 +1,7 @@
 import json
 
 from loguru import logger
-from message_types import (
+from .message_types import (
     ChatModel,
     CheckModel,
     CreateEvent,
