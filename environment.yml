@@ -1,14 +1,20 @@
-name: crossworker
+name: base
 channels:
   - defaults
-  - conda-forge
 dependencies:
-  - websockets
-  - loguru
-  - python=3.10.6
-  - python-dotenv
-  - discord.py
-  - ca-certificates
-  - pip
+  - conda
   - openssl
+  - python=3.10.6
+  - websockets
+  - python-dotenv
+  - mamba
+  - ca-certificates
+  - pre-commit
+  - pip
+  - certifi
+  - conda-libmamba-solver
   - mypy
+  - loguru
+  - discord.py
+  - pydantic
+
