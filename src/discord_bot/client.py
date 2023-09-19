@@ -2,7 +2,7 @@ import re
 
 import discord
 from loguru import logger
-from worker import Worker
+from .worker import Worker
 
 intents = discord.Intents.default()
 intents.message_content = True

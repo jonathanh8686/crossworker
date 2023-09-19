@@ -1,11 +1,12 @@
 import json
 
-import message_parser as mp
+from . import message_parser as mp
 from enum import Enum
 from loguru import logger
-from message_types import GameEvent, UpdateCellModel
-from socker_handler import WebsocketClient
+from .message_types import GameEvent, UpdateCellModel
+from .socker_handler import WebsocketClient
 from typing import Optional
+from ..stats import stats
 
 
 class WorkerState(Enum):
@@ -26,6 +27,7 @@ class Worker:
         self.history: dict[str, list[GameEvent]] = {}
 
         self.event_map: dict[str, GameEvent] = {}
+        logger.info(f"Testing stats import: {stats.print_data('Hello World')}")
 
     async def attach(self):
         await WebsocketClient().join_game(self.game_id, self.on_game_message)
